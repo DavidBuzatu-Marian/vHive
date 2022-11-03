@@ -1,4 +1,4 @@
-disabled_plugins = ["cri"]
+
 root = "/var/lib/firecracker-containerd/containerd"
 state = "/run/firecracker-containerd"
 [grpc]
@@ -8,6 +8,18 @@ state = "/run/firecracker-containerd"
     pool_name = "fc-dev-thinpool"
     base_image_size = "10GB"
     root_path = "/var/lib/firecracker-containerd/snapshotter/devmapper"
+
+  # Enable stargz snapshotter for CRI
+  [plugins."io.containerd.grpc.v1.cri".containerd]
+    snapshotter = "stargz"
+    disable_snapshot_annotations = false
+
+# Plug stargz snapshotter into containerd
+[proxy_plugins]
+  [proxy_plugins.stargz]
+    type = "snapshot"
+    address = "/run/containerd-stargz-grpc/containerd-stargz-grpc.sock"
+
 
 [debug]
   level = "debug"

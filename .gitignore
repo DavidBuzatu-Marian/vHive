@@ -25,3 +25,8 @@
 
 # Binaries
 vhive
+
+# Script generated files
+examples/deployer/deployer
+runc
+endpoints.json

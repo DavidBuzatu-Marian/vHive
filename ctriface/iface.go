@@ -314,12 +314,14 @@ func getImageURL(image string) string {
 
 func (o *Orchestrator) getImage(ctx context.Context, imageName string) (*containerd.Image, error) {
 	image, found := o.cachedImages[imageName]
+	logger := log.WithFields(log.Fields{"image": imageName})
 	if !found {
 		var err error
 		log.Debug(fmt.Sprintf("Pulling image %s", imageName))
 
 		imageURL := getImageURL(imageName)
 		local, _ := isLocalDomain(imageURL)
+		logger.Debug("Is local? %s", local)
 		if local {
 			// Pull local image using HTTP
 			resolver := docker.NewResolver(docker.ResolverOptions{
@@ -339,6 +341,8 @@ func (o *Orchestrator) getImage(ctx context.Context, imageName string) (*contain
 				containerd.WithPullUnpack,
 				containerd.WithPullSnapshotter(o.snapshotter),
 			)
+			logger.Debug("Error when pulling %s with snapshotter: %s: ", imageURL, o.snapshotter)
+			logger.Debug(err)
 		}
 
 		if err != nil {
