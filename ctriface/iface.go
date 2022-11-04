@@ -341,7 +341,7 @@ func (o *Orchestrator) getImage(ctx context.Context, imageName string) (*contain
 				containerd.WithPullUnpack,
 				containerd.WithPullSnapshotter(o.snapshotter),
 			)
-			logger.Debug("Error when pulling %s with snapshotter: %s: ", imageURL, o.snapshotter)
+			logger.Debug(fmt.Sprintf("Error when pulling %s with snapshotter: %s: . Error:\n", imageURL, o.snapshotter))
 			logger.Debug(err)
 		}
 
