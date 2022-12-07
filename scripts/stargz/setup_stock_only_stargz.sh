@@ -21,7 +21,7 @@ sudo wget -O /etc/systemd/system/stargz-snapshotter.service https://raw.githubus
 sudo systemctl enable --now stargz-snapshotter
 
 # Check if containerd process is running and stop if true
-if ! sudo screen -list | grep -q "containerd"; then
+if sudo screen -list | grep "containerd"; then
     sudo screen -XS containerd quit
 fi
 
