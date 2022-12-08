@@ -63,6 +63,6 @@ if [ -z "$USE_STARGZ" ]; then
     USE_STARGZ=false
 fi
 
-if [ "$USE_STARGZ" = true]; then
+if [ "$USE_STARGZ" = true ]; then
     $SCRIPTS/stargz/setup_stock_only_stargz.sh
 fi

@@ -18,16 +18,12 @@ on:
 env:
   GOOS: linux
   GO111MODULE: on
-  TMPDIR: /root/tmp/
 
 jobs:
   stargz-container-test:
     name: Test running stargz-based image using kn
     runs-on: ubuntu-20.04
     steps:
-
-    - name: Setup TMPDIR
-      run: mkdir -p $TMPDIR
 
     - name: Set up Go 1.18
       uses: actions/setup-go@v3
