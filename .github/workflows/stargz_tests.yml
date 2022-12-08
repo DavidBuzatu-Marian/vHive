@@ -46,7 +46,7 @@ jobs:
       run: ./scripts/cluster/create_one_node_cluster.sh stock-only
 
     - name: Run test container with kn
-      run: sudo kn service apply stargz-test -f ./stargz-node.yaml --concurrency-target 1 
+      run: sudo kn service apply stargz-test -f ./configs/knative_workloads/stargz-node.yaml --concurrency-target 1 
 
     - name: Curl container
       run: curl http://stargz-test.default.192.168.1.240.sslip.io | grep "Hello World"
