@@ -9,7 +9,8 @@ CONFIGS=$ROOT/configs/stargz
 wget --continue --quiet https://github.com/containerd/stargz-snapshotter/releases/download/v0.13.0/stargz-snapshotter-v0.13.0-linux-amd64.tar.gz
 
 # Copy stargz config
-sudo cp $CONFIGS/config.toml /etc/containerd/
+sudo mkdir -p /etc/containerd
+sudo cp $CONFIGS/config.toml /etc/containerd/config.toml
 
 # Unzip stargz binary and install it
 sudo tar -C /usr/local/bin -xvf stargz-snapshotter-v0.13.0-linux-amd64.tar.gz containerd-stargz-grpc ctr-remote
