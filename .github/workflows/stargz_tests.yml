@@ -61,7 +61,7 @@ jobs:
 
 
     - name: Setup stock-only node
-      run: sudo ./scripts/cloudlab/setup_node.sh stock-only use-stargz
+      run: ./scripts/cloudlab/setup_node.sh stock-only use-stargz
 
     - name: Check containerd service is running
       run: sudo screen -list | grep "containerd"
@@ -70,10 +70,10 @@ jobs:
       run: sudo systemctl is-active --quiet stargz-snapshotter
     
     - name: Setup single-node cluster
-      run: sudo ./scripts/cluster/create_one_node_cluster.sh stock-only
+      run: ./scripts/cluster/create_one_node_cluster.sh stock-only
 
     - name: Run test container with kn
-      run: sudo kn service apply stargz-test -f ./configs/knative_workloads/stargz-node.yaml --concurrency-target 1 
+      run: kn service apply stargz-test -f ./configs/knative_workloads/stargz-node.yaml --concurrency-target 1 
 
     - name: Curl container
       run: curl http://stargz-test.default.192.168.1.240.sslip.io | grep "Hello World"
