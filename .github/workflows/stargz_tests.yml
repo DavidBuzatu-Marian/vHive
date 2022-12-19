@@ -71,9 +71,6 @@ jobs:
 
       - name: Check stargz-snapshotter is running
         run: sudo systemctl is-active --quiet stargz-snapshotter
-      
-      - name: Setup single-node cluster
-        run: ./scripts/cluster/create_one_node_cluster.sh stock-only
 
       - name: Run test container with kn
         run: kn service apply stargz-test -f ./configs/knative_workloads/stargz-node.yaml --concurrency-target 1 
